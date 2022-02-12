@@ -75,6 +75,16 @@ export const usersSlice = createSlice({
         return user.id !== action.payload.id;
       });
     },
+    sortUsersAsc: (state, action) => {
+      return state.sort((a, b) =>
+        a.username > b.username ? 1 : b.username > a.username ? -1 : 0
+      );
+    },
+    sortUsersDesc: (state, action) => {
+      return state.sort((a, b) =>
+        a.username > b.username ? -1 : b.username > a.username ? 1 : 0
+      );
+    },
   },
   extraReducers: {
     [fetchUsers.fulfilled.type]: (state, action) => {
@@ -92,7 +102,7 @@ export const usersSlice = createSlice({
   },
 });
 export const {
-  actions: { addUser, editUser, removeUser },
+  actions: { addUser, editUser, removeUser, sortUsersAsc, sortUsersDesc },
 } = usersSlice;
 
 export const selectUsersData = (state) => state.users;

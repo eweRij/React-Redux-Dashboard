@@ -5,7 +5,12 @@ import { Table, Button, Alert } from "react-bootstrap";
 
 import "./UsersList.scss";
 
-import { selectUsersData, fetchUsers } from "../features/users/usersSlice";
+import {
+  selectUsersData,
+  fetchUsers,
+  sortUsersAsc,
+  sortUsersDesc,
+} from "../features/users/usersSlice";
 
 import EditUserModal from "./EditUserModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
@@ -34,6 +39,12 @@ const UsersList = () => {
     setShowConfirmation(!showConfirmation);
     setIdToDelete(id);
   };
+  const handleSortAsc = () => {
+    dispatch(sortUsersAsc());
+  };
+  const handleSortDesc = () => {
+    dispatch(sortUsersDesc());
+  };
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
@@ -55,7 +66,12 @@ const UsersList = () => {
           <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Username</th>
+            <th>
+              Username <Button onClick={handleSortAsc}>Sort A-Z</Button>
+              <Button style={{ marginLeft: "10px" }} onClick={handleSortDesc}>
+                Sort Z-A
+              </Button>
+            </th>
             <th>Email</th>
             <th>City</th>
             <th>Edit</th>

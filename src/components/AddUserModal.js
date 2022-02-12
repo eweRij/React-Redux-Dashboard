@@ -27,7 +27,7 @@ const AddUserModal = ({ show, handleClose }) => {
     setNewUser((prevState) => {
       return {
         ...prevState,
-        id: users.length > 0 ? users[users.length - 1].id + 1 : 1,
+        id: Math.floor(Math.random() * (1000 - 11 + 1) + 11),
         [name]: value,
       };
     });
